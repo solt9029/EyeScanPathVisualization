@@ -6,12 +6,23 @@ PImage background;
 String [] lines;
 float [][] data;
 
+int buttonPosition = 0;
+int itemPosition = 0;
+final int BUTTON_NUM = 5;
+final int ITEM_NUM = 16;
+
 void settings() {
-  background = loadImage("background.png");
-  lines = loadStrings("data.csv");
-  data = new float [lines.length][5];
   size(WINDOW_WIDTH, WINDOW_HEIGHT);
   
+  
+}
+
+void draw() {
+  background(255);
+  
+  background = loadImage("./input/" + str(buttonPosition) + "_" + str(itemPosition) + ".bmp");
+  lines = loadStrings("./input/" + str(buttonPosition) + "_" + str(itemPosition) + "_eye.csv");
+  data = new float [lines.length][5];
   for (int i = 0; i < lines.length; i++) {
     String [] items = split(lines[i], ',');
     data[i][0] = float(items[0]);
@@ -20,16 +31,21 @@ void settings() {
     data[i][3] = float(items[3]);
     data[i][4] = float(items[4]);
   }
-}
-
-void draw() {
-  background(255);
+  
   image(background, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
   
   if (is_animated) {
     dynamicDraw();
   } else {
     staticDraw();
+    itemPosition++;
+    if (itemPosition >= ITEM_NUM) {
+      itemPosition = 0;
+      buttonPosition++; 
+    }
+    if (buttonPosition >= BUTTON_NUM) {
+      noLoop();
+    }
   }
 }
 
@@ -76,6 +92,4 @@ void staticDraw() {
   }
   
   save("output.png");
-  
-  noLoop();
 }
