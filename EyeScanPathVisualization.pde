@@ -1,5 +1,5 @@
-final int WINDOW_WIDTH = 1920;
-final int WINDOW_HEIGHT = 1080;
+final int WINDOW_WIDTH = 1280;
+final int WINDOW_HEIGHT = 1024;
 final boolean is_animated = false;
 
 PImage background;
@@ -9,12 +9,10 @@ float [][] data;
 int buttonPosition = 0;
 int itemPosition = 0;
 final int BUTTON_NUM = 5;
-final int ITEM_NUM = 16;
+final int ITEM_NUM = 8;
 
 void settings() {
   size(WINDOW_WIDTH, WINDOW_HEIGHT);
-  
-  
 }
 
 void draw() {
@@ -58,11 +56,11 @@ void dynamicDraw() {
       if (data[i][3] < time) {
         stroke(255, 0, 0, 100);
         fill(255, 0, 0, 100);
-        ellipse(data[i][0], data[i][1], data[i][4] / 5, data[i][4] / 5);
+        ellipse(data[i][0], data[i][1], data[i][4] / 10, data[i][4] / 10);
       } else {
         stroke(255, 0, 0, 100);
         fill(255, 0, 0, 100);
-        ellipse(data[i][0], data[i][1], (time - data[i][3]) / 5, (time - data[i][3]) / 5);
+        ellipse(data[i][0], data[i][1], (time - data[i][3]) / 10, (time - data[i][3]) / 10);
       }
       if (i > 0) {
         stroke(255, 0, 0, 100);
@@ -83,7 +81,7 @@ void staticDraw() {
   for (int i = 0; i < data.length; i++) {
     stroke(255, 0, 0, 100);
     fill(255, 0, 0, 100);
-    ellipse(data[i][0], data[i][1], data[i][4] / 5, data[i][4] / 5);
+    ellipse(data[i][0], data[i][1], data[i][4] / 10, data[i][4] / 10);
     
     textAlign(CENTER);
     textSize(20);
@@ -91,5 +89,5 @@ void staticDraw() {
     text(i + 1, data[i][0], data[i][1] + 10);
   }
   
-  save("output.png");
+  save("./output/" + str(buttonPosition) + "_" + str(itemPosition) + ".bmp");
 }
